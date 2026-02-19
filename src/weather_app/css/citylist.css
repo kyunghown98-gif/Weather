@@ -1,0 +1,93 @@
+.citylist {
+  padding: 0 clamp(10px, 1.5vw, 20px);
+  overflow-y: auto;
+}
+
+.citylist .title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.citylist h2 {
+  margin: clamp(8px, 1vh, 16px) 0;
+  font-size: clamp(14px, 1.5vw, 20px);
+}
+
+.citylist .title .line {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: var(--yellow);
+  flex: 1;
+}
+
+.citylist .city_items {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1vh, 16px);
+  cursor: pointer;
+}
+
+.citylist .city_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 3px solid var(--yellow);
+  padding: 0 5px;
+}
+
+.citylist .city_item .city_name {
+  font-size: clamp(12px, 1.3vw, 20px);
+  margin-right: 0.5rem;
+}
+
+.citylist .city_item button {
+  border: none;
+  background: none;
+}
+
+.citylist .city_add {
+  margin-top: 0.8rem;
+  border: 3px dashed var(--yellow);
+  text-align: center;
+  padding: clamp(6px, 0.8vh, 10px) 0;
+  cursor: pointer;
+  font-size: clamp(11px, 1.1vw, 14px);
+}
+
+.citylist .city_search {
+  margin-top: 0.8rem;
+  border: 3px solid var(--yellow);
+}
+
+.citylist .city_search form {
+  position: relative;
+  height: 100%;
+}
+
+.citylist .city_search form input {
+  width: 100%;
+  outline: none;
+  border: none;
+  height: 100%;
+  padding: clamp(10px, 1.2vh, 17px) 5px;
+  background: none;
+  color: var(--yellow);
+  font-size: clamp(12px, 1.2vw, 18px);
+}
+
+.citylist .city_search form .btn {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 3px;
+}
+
+.citylist .city_search form .btn button {
+  border: none;
+  background: none;
+  font-size: clamp(12px, 1.2vw, 18px);
+}

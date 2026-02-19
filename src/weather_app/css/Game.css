@@ -1,0 +1,128 @@
+.game {
+  padding: clamp(10px, 1.5vh, 16px);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: clamp(6px, 1vh, 12px);
+  flex-shrink: 0;
+}
+
+.game-title {
+  font-size: clamp(14px, 1.5vw, 20px);
+  font-weight: 700;
+  color: var(--chang_yellow);
+  letter-spacing: 2px;
+}
+
+.game-score {
+  display: flex;
+  gap: 6px;
+  font-size: clamp(9px, 0.9vw, 12px);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.score-win { color: var(--chang_yellow); }
+.score-draw { color: var(--chang_text); }
+.score-lose { color: var(--red); }
+
+.game-board {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 0.8vw, 12px);
+  min-height: 0;
+}
+
+.game-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(4px, 0.5vh, 6px);
+  padding: clamp(8px, 1vh, 12px);
+  border: 2px solid var(--chang_yellow);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.game-box.winner {
+  border-color: var(--chang_yellow);
+  background: rgba(240, 199, 31, 0.1);
+  box-shadow: 0 0 20px rgba(240, 199, 31, 0.2);
+}
+
+.game-box.loser {
+  border-color: rgba(255, 0, 0, 0.4);
+  opacity: 0.6;
+}
+
+.game-label {
+  font-size: clamp(9px, 0.9vw, 12px);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--chang_yellow);
+}
+
+.game-emoji {
+  font-size: clamp(24px, 3vh, 36px);
+}
+
+.game-choice {
+  font-size: clamp(10px, 1vw, 14px);
+  color:var( --chang_text);
+  font-weight: 600;
+}
+
+.game-vs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  color: var(--chang_yellow);
+}
+
+.game-result {
+  font-size: clamp(12px, 1.3vw, 18px);
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.game-result.win { color: var(--chang_yellow); }
+.game-result.lose { color: var(--red); }
+.game-result.draw { color: var(--chang_text); }
+
+.game-buttons {
+  display: flex;
+  gap: clamp(4px, 0.5vw, 8px);
+  margin-top: clamp(6px, 1vh, 12px);
+  flex-shrink: 0;
+}
+
+.game-buttons button {
+  flex: 1;
+  padding: clamp(5px, 0.7vh, 8px);
+  border: 2px solid var(--chang_yellow);
+  background: none;
+  color: var(--chang_yellow);
+  font-size: clamp(10px, 1vw, 13px);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.game-buttons button:hover {
+  background: var(--chang_yellow);
+  color: var( --chang);
+}

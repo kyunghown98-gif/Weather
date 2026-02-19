@@ -1,0 +1,79 @@
+.currentweather {
+  text-align: center;
+  padding: clamp(8px, 1.5vh, 16px) 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(4px, 0.8vh, 10px);
+}
+
+.currentweather .location p {
+  font-size: clamp(10px, 1.2vw, 15px);
+}
+
+.currentweather .location h2 {
+  font-size: clamp(20px, 2.5vw, 32px);
+  color: var(--wh);
+}
+
+.currentweather .location span {
+  font-size: clamp(9px, 1vw, 12px);
+  color: var(--wh);
+}
+
+.currentweather .icon span {
+  display: inline-block;
+  font-size: clamp(40px, 6vh, 80px);
+  animation: bounce 0.8s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.currentweather .temp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.currentweather .temp p {
+  font-size: clamp(24px, 3vw, 38px);
+  color: var(--wh);
+}
+
+.currentweather .temp span {
+  font-size: clamp(12px, 1.5vw, 18px);
+  color: var(--yellow);
+}
+
+.currentweather .description {
+  text-transform: uppercase;
+  font-size: clamp(10px, 1.2vw, 14px);
+  margin: clamp(4px, 0.8vh, 16px) 0;
+}
+
+.currentweather .detail {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.currentweather .detail .box {
+  width: 20%;
+  min-width: 40px;
+  max-width: 70px;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--yellow);
+  padding-top: 4px;
+  font-size: clamp(8px, 0.9vw, 12px);
+  align-content: center;
+}
+
+.currentweather .detail .box .text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}

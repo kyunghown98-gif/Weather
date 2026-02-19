@@ -1,0 +1,87 @@
+.weeklyforecast {
+  grid-row: 2 / 3;
+  padding: clamp(10px, 1.5vh, 20px);
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.weekly-title {
+  font-size: clamp(14px, 1.5vw, 20px);
+  font-weight: 700;
+  margin-bottom: clamp(8px, 1.2vh, 20px);
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  flex-shrink: 0;
+  color: var(--chang_yellow);;
+}
+
+.weekly-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border: 3px solid var(--chang_yellow);
+  padding: 10px;
+}
+
+.weekly-item {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1vw, 20px);
+}
+
+.weekly-day {
+  font-size: clamp(10px, 1.1vw, 14px);
+  font-weight: 600;
+  color:var(--chang_text);
+  width: clamp(60px, 7vw, 100px);
+  text-align: left;
+}
+
+.weekly-icon {
+  width: clamp(24px, 3vw, 40px);
+  height: clamp(24px, 3vw, 40px);
+  display: block;
+  flex-shrink: 0;
+}
+
+.temp-min {
+  font-size: clamp(10px, 1.1vw, 14px);
+  color:var(--chang_text);
+  font-weight: 400;
+  width: clamp(30px, 3vw, 40px);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.temp-bar {
+  position: relative;
+  height: clamp(4px, 0.6vh, 8px);
+  background: rgba(0, 0, 0,0.2);
+  border-radius: 10px;
+  flex: 1;
+  min-width: 60px;
+}
+
+.temp-bar-fill {
+  position: absolute;
+  height: 100%;
+  background: linear-gradient(to right, #4169e1, #ffd700, #ff6347);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.temp-max {
+  font-size: clamp(10px, 1.1vw, 14px);
+  font-weight: 600;
+  width: clamp(30px, 3vw, 40px);
+  text-align: center;
+  flex-shrink: 0;
+  color:var(--chang_text);
+}

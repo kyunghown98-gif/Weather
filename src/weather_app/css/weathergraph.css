@@ -1,0 +1,99 @@
+.weathergraph {
+  grid-row: 3 / 4;
+  padding: clamp(10px, 1.5vh, 20px);
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.graph-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: clamp(8px, 1.2vh, 20px);
+  flex-shrink: 0;
+}
+
+.graph-title {
+  font-size: clamp(14px, 1.5vw, 20px);
+  font-weight: 700;
+  color: var(--chang_yellow);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.graph-tabs {
+  display: flex;
+  gap: clamp(4px, 0.5vw, 10px);
+}
+
+.graph-tabs button {
+  background: none;
+  border: none;
+  color: var(--chang_yellow);
+  padding: clamp(4px, 0.6vh, 8px) clamp(8px, 1vw, 16px);
+  font-size: clamp(9px, 0.9vw, 12px);
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 3px solid var(--chang_yellow);
+}
+
+.graph-tabs button.active {
+  background: var(--chang_yellow);
+  color: var(--chang_red);
+}
+
+
+.graph-container {
+  position: relative;
+  flex: 1;
+  border-radius: 10px;
+  padding: clamp(10px, 1.5vh, 20px);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border: 3px solid var(--chang_yellow);
+}
+
+.graph-svg {
+  width: 100%;
+  flex: 1;
+  min-height: 60px;
+}
+
+.graph-values {
+  position: absolute;
+  top: clamp(10px, 1.5vh, 20px);
+  left: clamp(10px, 1.5vw, 20px);
+  right: clamp(10px, 1.5vw, 20px);
+  height: 60%;
+  pointer-events: none;
+}
+
+.graph-value {
+  position: absolute;
+  transform: translate(-50%, -120%);
+  font-size: clamp(9px, 0.9vw, 12px);
+  font-weight: 600;
+  color: var(--chang_yellow);
+  padding: 3px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.graph-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 clamp(4px, 0.5vw, 10px);
+  margin-top: clamp(4px, 0.6vh, 10px);
+}
+
+.graph-label {
+  font-size: clamp(9px, 0.9vw, 12px);
+  color: var(--chang_yellow);
+  text-align: center;
+}

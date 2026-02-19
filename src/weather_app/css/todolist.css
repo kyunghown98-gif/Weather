@@ -1,0 +1,132 @@
+.todolist {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.todo-title {
+  font-size: clamp(14px, 1.5vw, 20px);
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 2px;
+  margin-bottom: clamp(6px, 1vh, 12px);
+  flex-shrink: 0;
+  font-weight: 900;
+}
+
+.todo-form {
+  display: flex;
+  gap: clamp(4px, 0.5vw, 8px);
+  margin-bottom: clamp(6px, 1vh, 12px);
+  flex-shrink: 0;
+}
+
+.todo-form input {
+  flex: 1;
+  padding: clamp(6px, 0.8vh, 10px) clamp(8px, 1vw, 12px);
+  border: 2px solid var(--chang_yellow);
+  background: rgba(255, 255, 255, 0.05);
+  color:var(--chang_yellow) ;
+  outline: none;
+  font-size: clamp(11px, 1.1vw, 14px);
+  min-width: 0;
+}
+
+.todo-form input:focus {
+  border-color: var(--chang_yellow);
+}
+
+.todo-form button {
+    padding: 0 8px;
+  border: 2px solid var(--chang_yellow);
+  background: var(--chang_yellow);
+  color: var(--chang_red);
+  font-size: clamp(10px, 1vw, 13px);
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.todo-filters {
+  display: flex;
+  margin-bottom: clamp(6px, 1vh, 12px);
+  flex-shrink: 0;
+}
+
+.todo-filters button {
+  flex: 1;
+  padding: clamp(5px, 0.7vh, 8px);
+  border: 2px solid var(--chang_yellow);
+  background: none;
+  color: var(--chang_yellow);
+  font-size: clamp(9px, 0.9vw, 12px);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.todo-filters button.active {
+  background: var(--chang_yellow);
+  color: var(--chang_red);
+}
+
+
+.todo-items {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 0.5vh, 8px);
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 0.8vw, 10px);
+  padding: clamp(6px, 0.8vh, 10px) clamp(8px, 1vw, 12px);
+  transition: all 0.3s ease;
+}
+
+.todo-item.done .todo-text {
+  text-decoration: line-through;
+}
+
+.todo-check {
+  cursor: pointer;
+  font-size: clamp(12px, 1.2vw, 16px);
+  flex-shrink: 0;
+}
+
+.todo-text {
+  flex: 1;
+  font-size: clamp(11px, 1.1vw, 14px);
+  color: var(--chang_text);
+  font-weight: 500;
+}
+
+.todo-delete {
+  border: none;
+  background: none;
+  color: var(--red);
+  font-size: clamp(12px, 1.2vw, 16px);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.todo-items::-webkit-scrollbar {
+  width: 4px;
+}
+
+.todo-items::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.todo-items::-webkit-scrollbar-thumb {
+  background:var(--yellow);
+  border-radius: 4px;
+}

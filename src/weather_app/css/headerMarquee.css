@@ -1,0 +1,13 @@
+.header-marquee {
+    max-width: 1440px;
+    height: 32px;
+    line-height: 26px;
+    padding: '10px 0';
+    background-color: var(--marquee);
+    color: var(--chang_red);
+    margin: 0 auto;
+    border: 3px  solid var(--chang_red);
+}
+.header-marquee span{
+    margin-right: 16px;
+}

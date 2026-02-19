@@ -1,0 +1,94 @@
+:root {
+  --bg: #050505;
+  --yellow: #F0C71F;
+  --blue: #00469B;
+  --deep-blue: #0a1e5e;
+  --red: #C82B03;
+  --wh: #EBDFC5;
+}
+body.dark {
+  --chang: var(--bg);
+  --chang_yellow: var(--yellow);
+  --chang_red: var(--red);
+  --chang_text: var(--wh);
+  --chang_list: var(--bg);
+  --marquee: var(--yellow);
+  --bg-image: url(/weather/dark.png);
+}
+
+body.light {
+  --chang: var(--wh);
+  --chang_yellow: var(--blue);
+  --chang_red: var(--yellow);
+  --chang_text: var(--bg);
+  --chang_list: #00469B;
+  --marquee: var(--red);
+  --bg-image: url(/weather/light.png);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  background: var(--chang);
+  color: var(--yellow);
+  min-height: 100vh;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+}
+
+.main .main_i {
+  max-width: 1440px;
+  height: calc(100vh - 152px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.list {
+  grid-column: 1/2;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  border: 3px solid var(--red);
+  border-top: none;
+  overflow: hidden;
+  background: var(--chang_list);
+}
+
+.main .main_i .weather_infor {
+  grid-column: 2 / 4;
+  background-image: var(--bg-image);
+  background-position: center;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  overflow: hidden;
+}
+
+.main .main_i .widgets {
+  grid-column: 4 / 5;
+  display: grid;
+  border: 3px solid var(--red);
+  overflow: hidden;
+}
+.widgets_f {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+.widgets_f .box {
+  flex-shrink: 0;
+}
+.widgets_f .ootd {
+  min-height: 0;
+}
