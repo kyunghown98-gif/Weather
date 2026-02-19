@@ -42,7 +42,7 @@ const HourlyForecast = () => {
           100: { slidesPerView: 3 },
           450: { slidesPerView: 4 },
           650: { slidesPerView: 5 },
-          850: { slidesPerView: 5 },
+          850: { slidesPerView: 4 },
           1024: { slidesPerView: 6 },
         }}
         className="hourly_swiper"
