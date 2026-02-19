@@ -6,6 +6,7 @@
   --red: #C82B03;
   --wh: #EBDFC5;
 }
+
 body.dark {
   --chang: var(--bg);
   --chang_yellow: var(--yellow);
@@ -25,6 +26,7 @@ body.light {
   --marquee: var(--red);
   --bg-image: url(/weather/light.png);
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -49,7 +51,7 @@ body {
 
 .main .main_i {
   max-width: 1440px;
-  height: calc(100vh - 152px);
+  height: calc(100vh - 146px);
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -74,21 +76,30 @@ body {
   overflow: hidden;
 }
 
+.main .main_i .weather_infor > * {
+  min-height: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
 .main .main_i .widgets {
   grid-column: 4 / 5;
   display: grid;
   border: 3px solid var(--red);
   overflow: hidden;
 }
+
 .widgets_f {
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
 }
+
 .widgets_f .box {
   flex-shrink: 0;
 }
+
 .widgets_f .ootd {
   min-height: 0;
 }

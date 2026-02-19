@@ -5,6 +5,8 @@
   overflow: hidden;
   position: relative;
   padding: clamp(8px, 1.5vh, 16px);
+  min-height: 0;    
+  height: 100%;
 }
 
 .hourlyforecast h2 {
