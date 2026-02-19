@@ -28,7 +28,6 @@
     display: flex;
     flex-direction: column;
     border-top: 3px solid var(--red);
-    padding-bottom: 16px;
   }
 
   .tablet-left-widgets {
