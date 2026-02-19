@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setGraphType } from '../redux/slice';
 import '../css/weathergraph.css';
@@ -22,14 +22,15 @@ const WeatherGraph = () => {
 
   const getGraphData = () => {
     if (!weeklyForecast) return [];
-    
-    switch(graphType) {
+
+    switch (graphType) {
       case 'temperature':
         return weeklyForecast.map(day => convertTemp(day.maxTemp));
       case 'humidity':
         return weeklyForecast.map(day => day.humidity);
       case 'rainfall':
-        return weeklyForecast.map(day => Math.floor(Math.random() * 10));
+        // ✅ 실제 강수량 데이터 사용 (랜덤값 제거)
+        return weeklyForecast.map(day => day.rainfall ?? 0);
       default:
         return weeklyForecast.map(day => convertTemp(day.maxTemp));
     }
@@ -38,7 +39,7 @@ const WeatherGraph = () => {
   if (!weeklyForecast || weeklyForecast.length === 0) {
     return (
       <div className='weathergraph'>
-        <p style={{color: '#fff'}}>주간 예보 데이터를 불러오는 중...</p>
+        <p style={{ color: '#fff' }}>주간 예보 데이터를 불러오는 중...</p>
       </div>
     );
   }
@@ -53,19 +54,19 @@ const WeatherGraph = () => {
       <div className='graph-header'>
         <h2 className='graph-title'>OVERVIEW</h2>
         <div className='graph-tabs'>
-          <button 
+          <button
             className={graphType === 'temperature' ? 'active' : ''}
             onClick={() => dispatch(setGraphType('temperature'))}
           >
             TEMPERATURE
           </button>
-          <button 
+          <button
             className={graphType === 'humidity' ? 'active' : ''}
             onClick={() => dispatch(setGraphType('humidity'))}
           >
             HUMIDITY
           </button>
-          <button 
+          <button
             className={graphType === 'rainfall' ? 'active' : ''}
             onClick={() => dispatch(setGraphType('rainfall'))}
           >
@@ -140,9 +141,9 @@ const WeatherGraph = () => {
                   top: `${y}%`,
                 }}
               >
-                {graphType === 'temperature' ? `${value}°${unit}` : 
-                 graphType === 'humidity' ? `${value}%` : 
-                 `${value}mm`}
+                {graphType === 'temperature' ? `${value}°${unit}` :
+                  graphType === 'humidity' ? `${value}%` :
+                  `${value}mm`}
               </div>
             );
           })}

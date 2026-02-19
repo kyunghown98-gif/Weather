@@ -3,10 +3,15 @@ import { useSelector } from 'react-redux'
 import '../css/currentweather.css'
 
 const CurrentWeather = () => {
+  
+  const { currentWeather, loading, unit, weeklyForecast } = useSelector((state) => state.weather)
+
+  const todayForecast = weeklyForecast?.[0]
+
   const getWeatherEmoji = (main, id) => {
     switch (main) {
       case "Clear": return "☀️";
-      case "Clouds": return id === 801 ? "🌤️" : "☁️";
+      case "Clouds": return id === 801 ? "🌤️" : "☁️";  //
       case "Rain": return "🌧️";
       case "Drizzle": return "🌦️";
       case "Thunderstorm": return "⛈️";
@@ -15,8 +20,6 @@ const CurrentWeather = () => {
       default: return "⛅";
     }
   };
-
-  const { currentWeather, loading, unit } = useSelector((state) => state.weather)
 
   const convertTemp = (temp) => {
     if (unit === 'F') return Math.round(temp * 9 / 5 + 32);
@@ -28,7 +31,9 @@ const CurrentWeather = () => {
   }
 
   const { name, main, weather, wind } = currentWeather;
-  const weatherEmoji = getWeatherEmoji(weather[0].main)
+
+
+  const weatherEmoji = getWeatherEmoji(weather[0].main, weather[0].id)
 
   const today = new Date();
   const dateString = today.toLocaleDateString('en-US', {
@@ -71,7 +76,12 @@ const CurrentWeather = () => {
         <div className="box">
           <div className="text">
             <p>최고/최저</p>
-            <span>{convertTemp(main.temp_max)}° / {convertTemp(main.temp_min)}°</span>
+            <span>
+              {todayForecast
+                ? `${convertTemp(todayForecast.maxTemp)}° / ${convertTemp(todayForecast.minTemp)}°`
+                : `${convertTemp(main.temp_max)}° / ${convertTemp(main.temp_min)}°`
+              }
+            </span>
           </div>
         </div>
       </div>

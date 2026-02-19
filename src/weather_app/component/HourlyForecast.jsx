@@ -20,13 +20,13 @@ const HourlyForecast = () => {
 
   const hourlyData = hourlyForecast.list.slice(0, 8)
 
+
   const formatTime = (dt_txt) => {
     const date = new Date(dt_txt)
     const hours = date.getHours()
-    if (hours === 0) return ' 00시'
-    if (hours < 24) return ` ${hours}시`
-    if (hours === 24) return ' 24시'
-    return ` ${hours - 24}시`
+    if (hours === 0) return '00시'
+    if (hours === 12) return '12시'
+    return `${hours}시`
   }
 
   return (

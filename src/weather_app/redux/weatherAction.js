@@ -1,7 +1,38 @@
 import axios from "axios"
-import { getWeather, getHourlyForecast, getWeeklyForecast, setLoading, setCityWeather, setSearchResults,setGameUser, setGameCom, setGameResult,updateGameScore} from "./slice";
+import { getWeather, getHourlyForecast, getWeeklyForecast, setLoading, setCityWeather, setSearchResults, setGameUser, setGameCom, setGameResult, updateGameScore } from "./slice";
 
 const API_KEY = '66a0ab4dcf5f895d0b4df3f77c88297a'
+
+// ✅ 주간 예보 파싱 로직을 별도 함수로 분리 (중복 제거)
+const parseWeeklyForecast = (forecastData) => {
+  const dailyData = {}
+
+  forecastData.list.forEach(item => {
+    const date = item.dt_txt.split(' ')[0]
+    if (!dailyData[date]) {
+      dailyData[date] = {
+        temps: [],
+        weather: item.weather[0],
+        humidity: item.main.humidity,
+        windSpeed: item.wind.speed,
+        rainfall: 0,
+      }
+    }
+    dailyData[date].temps.push(item.main.temp)
+    // ✅ 실제 강수량 데이터 누적 (랜덤값 제거)
+    dailyData[date].rainfall += (item.rain?.['3h'] || 0)
+  })
+
+  return Object.keys(dailyData).slice(0, 5).map(date => ({
+    date,
+    maxTemp: Math.round(Math.max(...dailyData[date].temps)),
+    minTemp: Math.round(Math.min(...dailyData[date].temps)),
+    weather: dailyData[date].weather,
+    humidity: dailyData[date].humidity,
+    windSpeed: dailyData[date].windSpeed,
+    rainfall: Math.round(dailyData[date].rainfall * 10) / 10,
+  }))
+}
 
 function weather(lat, lon) {
   return async (dispatch) => {
@@ -20,9 +51,10 @@ function weather(lat, lon) {
       dispatch(getWeather(currentRes.data))
       dispatch(getHourlyForecast(forecastRes.data))
 
-      // 주간 예보도 같이 호출
-      const { lat: newLat, lon: newLon } = currentRes.data.coord
-      dispatch(fetchWeeklyForecast(newLat, newLon))
+      // ✅ 이미 가져온 forecastRes 데이터를 재사용 (추가 API 호출 불필요)
+      const weeklyForecast = parseWeeklyForecast(forecastRes.data)
+      dispatch(getWeeklyForecast(weeklyForecast))
+
     } catch (error) {
       console.error('날씨에러', error.response?.status, error.message)
     } finally {
@@ -68,46 +100,23 @@ function searchAndSwitch(cityName) {
     try {
       dispatch(setLoading(true))
 
-      // 1. 도시명으로 현재 날씨 검색
-      const currentRes = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`
-      )
-
-      const { lat, lon } = currentRes.data.coord
-
-      // 2. 시간별 + 주간 예보 동시 호출
-      const forecastRes = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
-      )
+      const [currentRes, forecastRes] = await Promise.all([
+        axios.get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`
+        ),
+        // ✅ 도시명으로 forecast도 동시 호출 (lat/lon 추출 후 재호출 불필요)
+        axios.get(
+          `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${API_KEY}&units=metric`
+        )
+      ])
 
       dispatch(getWeather(currentRes.data))
       dispatch(getHourlyForecast(forecastRes.data))
 
-      // 3. 주간 예보 처리
-      const dailyData = {}
-      forecastRes.data.list.forEach(item => {
-        const date = item.dt_txt.split(' ')[0]
-        if (!dailyData[date]) {
-          dailyData[date] = {
-            temps: [],
-            weather: item.weather[0],
-            humidity: item.main.humidity,
-            windSpeed: item.wind.speed,
-          }
-        }
-        dailyData[date].temps.push(item.main.temp)
-      })
-
-      const weeklyForecast = Object.keys(dailyData).slice(0, 5).map(date => ({
-        date,
-        maxTemp: Math.round(Math.max(...dailyData[date].temps)),
-        minTemp: Math.round(Math.min(...dailyData[date].temps)),
-        weather: dailyData[date].weather,
-        humidity: dailyData[date].humidity,
-        windSpeed: dailyData[date].windSpeed,
-      }))
-
+      // ✅ parseWeeklyForecast 재사용 (중복 코드 제거)
+      const weeklyForecast = parseWeeklyForecast(forecastRes.data)
       dispatch(getWeeklyForecast(weeklyForecast))
+
     } catch (error) {
       console.error('도시 검색 에러', error.message)
       alert('도시를 찾을 수 없습니다.')
@@ -124,30 +133,10 @@ function fetchWeeklyForecast(lat, lon) {
         `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
       )
 
-      const dailyData = {}
-      response.data.list.forEach(item => {
-        const date = item.dt_txt.split(' ')[0]
-        if (!dailyData[date]) {
-          dailyData[date] = {
-            temps: [],
-            weather: item.weather[0],
-            humidity: item.main.humidity,
-            windSpeed: item.wind.speed,
-          }
-        }
-        dailyData[date].temps.push(item.main.temp)
-      })
-
-      const weeklyForecast = Object.keys(dailyData).slice(0, 5).map(date => ({
-        date,
-        maxTemp: Math.round(Math.max(...dailyData[date].temps)),
-        minTemp: Math.round(Math.min(...dailyData[date].temps)),
-        weather: dailyData[date].weather,
-        humidity: dailyData[date].humidity,
-        windSpeed: dailyData[date].windSpeed,
-      }))
-
+      // ✅ parseWeeklyForecast 재사용
+      const weeklyForecast = parseWeeklyForecast(response.data)
       dispatch(getWeeklyForecast(weeklyForecast))
+
     } catch (error) {
       console.error('주간 예보 에러', error.message)
     }
@@ -187,6 +176,5 @@ function playGame(choice) {
     dispatch(updateGameScore(result));
   };
 }
-
 
 export const weatherAction = { weather, fetchCityWeather, searchCity, searchAndSwitch, fetchWeeklyForecast, playGame }
