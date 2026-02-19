@@ -1,6 +1,6 @@
 .citylist {
   padding: 0 clamp(10px, 1.5vw, 20px);
-  overflow-y: auto;
+  padding-bottom: 16px;
 }
 
 .citylist .title {
