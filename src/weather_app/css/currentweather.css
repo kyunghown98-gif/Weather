@@ -5,6 +5,7 @@
   flex-direction: column;
   justify-content: center;
   gap: clamp(4px, 0.8vh, 10px);
+  background-color: aqua;
 }
 
 .currentweather .location p {
