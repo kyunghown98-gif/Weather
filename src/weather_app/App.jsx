@@ -42,20 +42,19 @@ const App = () => {
       <HeaderMarquee />
       <div className="main">
         <div className="main_i">
-          {/* 왼쪽 열: 현재날씨 + Saved Cities */}
+      
           <div className="list">
             <CurrentWeather />
             <CityList />
           </div>
 
-          {/* 중앙 열: 날씨 정보 */}
           <div className="weather_infor">
             <HourlyForecast />
             <WeeklyForecast />
             <WeatherGraph />
           </div>
 
-          {/* 오른쪽 열: 위젯들 */}
+ 
           <div className="widgets">
             <div className="widgets_f">
               <div className="box">
@@ -67,7 +66,6 @@ const App = () => {
             </div>
           </div>
 
-          {/* 태블릿용: 왼쪽 열 하단에 표시될 게임/OOTD */}
           <div className="tablet-left-widgets">
             <div className="box">
               <Game />
